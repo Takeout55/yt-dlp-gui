@@ -1,7 +1,7 @@
 # File: main.py
 import sys
 from PySide6.QtUiTools import QUiLoader
-from PySide6.QtWidgets import QApplication, QTextEdit, QPushButton, QWidget, QComboBox
+from PySide6.QtWidgets import QApplication, QTextEdit, QPushButton, QCheckBox, QComboBox
 from PySide6.QtCore import QFile, QIODevice
 import subprocess
 
@@ -22,23 +22,19 @@ def run():
     elif hasSaved == True:
         ffmpeg = f"--ffmpeg-location \"{ffmpeg_path}"
 
+    playlist_checked = window.findChild(QCheckBox, "playlist_checkbox").isChecked()
+    if playlist_checked == False:
+        playlist_args = "--no-playlist"
+    elif playlist_checked == True:
+        playlist_args = ""
+
     link = window.findChild(QTextEdit, "link_entry").toPlainText()
     file_format = window.findChild(QComboBox,"format_dropdown").currentText()
-    #print(link,format.lower())
-
-    #res = subprocess.run(["ffmpeg","--help"], capture_output=True, text=True)
-    #print(res.stdout)
-    #process = subprocess.Popen(
-    #    [f"{ytdlp_path}", f"{link}", "--no-playlist", f"-t{file_format.lower().strip()}"],
-    #    stdin=subprocess.PIPE,
-    #    stdout=subprocess.PIPE,
-    #    text=True
-    #)
+    print(playlist_checked)
 
     with subprocess.Popen(
-            [f"{ytdlp_path}", f"{link}", "--no-playlist", f"-t{file_format.lower().strip()}"],
+            [f"{ytdlp_path}", f"{link}", f"{playlist_args}", f"-t{file_format.lower().strip()}"],
             stdout=subprocess.PIPE,
-            # stderr=subprocess.STDOUT,
             text=True,
             bufsize=1,
     ) as proc:
@@ -81,7 +77,7 @@ def info():
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    ui_file_name = "test.ui"
+    ui_file_name = "main.ui"
     ui_file = QFile(ui_file_name)
     if not ui_file.open(QIODevice.ReadOnly):
         print(f"Cannot open {ui_file_name}: {ui_file.errorString()}")

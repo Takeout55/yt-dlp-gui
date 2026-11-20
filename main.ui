@@ -113,6 +113,32 @@
     <string>Info</string>
    </property>
   </widget>
+  <widget class="QLabel" name="playlist_label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>120</y>
+     <width>66</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Playlist?</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="playlist_checkbox">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>120</y>
+     <width>21</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
