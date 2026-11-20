@@ -17,7 +17,7 @@ def run():
     global hasSaved
 
     if hasSaved == False:
-        ytdlp_path = "/home/takeout55/Music/yt-dlp"
+        ytdlp_path = "./yt-dlp.exe"
         ffmpeg = ""
     elif hasSaved == True:
         ffmpeg = f"--ffmpeg-location \"{ffmpeg_path}"
