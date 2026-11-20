@@ -10,5 +10,6 @@ The goal for this project is for a yt-dlp GUI that is as simple as possible, for
 
 Developed and tested on Linux using Pycharm 26.3.
 
-Currently only the windows binary is available under Releases, but a linux binary will be available sono
+Currently only the windows binary is available under Releases, but a Linux binary will be available soon.
+
 For future versions, two releases will be available. One that includes the Linux yt-dlp binary and one that includes the Windows yt-dlp binary.
