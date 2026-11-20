@@ -17,7 +17,7 @@ def run():
     global hasSaved
 
     if hasSaved == False:
-        ytdlp_path = "./yt-dlp.exe"
+        ytdlp_path = "/home/takeout55/Music/yt-dlp"
         ffmpeg = ""
     elif hasSaved == True:
         ffmpeg = f"--ffmpeg-location \"{ffmpeg_path}"
@@ -28,11 +28,21 @@ def run():
     elif playlist_checked == True:
         playlist_args = ""
 
+    title = window.findChild(QTextEdit,"title_entry").toPlainText()
+    title_checked = window.findChild(QCheckBox, "title_checkbox").isChecked()
+    print(title)
+    if title_checked == True:
+        title_args = f"{title}"
+    elif title_checked == False:
+        title_args = ""
+
     link = window.findChild(QTextEdit, "link_entry").toPlainText()
     file_format = window.findChild(QComboBox,"format_dropdown").currentText()
 
+    print(f"{ytdlp_path}",f"--output",f"{link}",f"{playlist_args}",f"-t{file_format.lower()}")
+
     with subprocess.Popen(
-            [f"{ytdlp_path}", f"{link}", f"{playlist_args}", f"-t{file_format.lower().strip()}"],
+            [f"{ytdlp_path}",f"--output",f"{title_args}",f"{link}",f"{playlist_args}",f"-t{file_format.lower()}"],
             stdout=subprocess.PIPE,
             text=True,
             bufsize=1,
@@ -45,6 +55,12 @@ def close():
 
 def info_close():
     info_window.close()
+
+def title_enable():
+    if window.findChild(QCheckBox, "title_checkbox").isChecked() == True:
+        window.findChild(QTextEdit,"title_entry").setEnabled(True)
+    elif window.findChild(QCheckBox, "title_checkbox").isChecked() == False:
+        window.findChild(QTextEdit, "title_entry").setEnabled(False)
 
 def save():
     global ffmpeg_path
@@ -105,5 +121,7 @@ if __name__ == "__main__":
         print(loader.errorString())
         sys.exit(-1)
     window.show()
+
+    window.findChild(QCheckBox,"title_checkbox").stateChanged.connect(title_enable)
 
     sys.exit(app.exec())
