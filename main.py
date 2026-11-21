@@ -17,10 +17,23 @@ def run():
     global hasSaved
 
     if hasSaved == False:
-        ytdlp_path = "./yt-dlp.exe"
+        ytdlp_path = "/home/takeout55/Music/yt-dlp"
         ffmpeg = ""
+        ffmpeg_path = ""
     elif hasSaved == True:
-        ffmpeg = f"--ffmpeg-location \"{ffmpeg_path}"
+        if ytdlp_path == "":
+            if ffmpeg_path == "":
+                ffmpeg = ""
+                print("ffmpeg path empty!")
+            else:
+                ffmpeg = f"--ffmpeg-location"
+                print("ffmpeg path found!")
+            ytdlp_path = "/home/takeout55/Music/yt-dlp"
+            print("default yt-dlp path!")
+        else:
+            ytdlp_path = ytdlp_path
+            print("custom yt-dlp path!")
+
 
     playlist_checked = window.findChild(QCheckBox, "playlist_checkbox").isChecked()
     if playlist_checked == False:
@@ -42,7 +55,7 @@ def run():
     print(f"{ytdlp_path}",f"--output",f"{link}",f"{playlist_args}",f"-t{file_format.lower()}")
 
     with subprocess.Popen(
-            [f"{ytdlp_path}",f"--output",f"{title_args}",f"{link}",f"{playlist_args}",f"-t{file_format.lower()}"],
+            [f"{ytdlp_path}",f"--output",f"{title_args}",f"{link}",f"{playlist_args}",f"-t{file_format.lower()}",f"{ffmpeg}",f"{ffmpeg_path}"],
             stdout=subprocess.PIPE,
             text=True,
             bufsize=1,
