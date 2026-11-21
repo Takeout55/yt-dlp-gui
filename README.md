@@ -13,3 +13,16 @@ Developed and tested on Linux using Pycharm 26.3.
 Currently only the windows binary is available under Releases, but a Linux binary will be available soon.
 
 For future versions, two releases will be available. One that includes the Linux yt-dlp binary and one that includes the Windows yt-dlp binary.
+
+# USAGE
+- Download and extract the .zip
+- Make sure that the latest version of yt-dlp.exe and the "lib" folder, containing "main.ui" and "info.ui" are in the same folder as main.exe
+- Run main.exe
+- By default, yt-dlp path is "./yt-dlp.exe" and ffmpeg path is "./ffmpeg/bin/ffmpeg.exe"
+
+## BUTTONS
+- Info = Opens the info tab, allows you to set custom paths for yt-dlp and ffmpeg (required for linux at the moment)
+- Link = Paste the link
+- Format = Select your chosen format out of the available choices (more will be added soon)
+- Playlist = By default, the program adds the "--no-playlist" argument, enabling playlist will disable this
+- Custom title = allows you to customize the name of the downloaded file
