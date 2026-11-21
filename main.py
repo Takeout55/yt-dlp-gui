@@ -81,6 +81,8 @@ def run():
         for line in proc.stdout:
             print(line, end="")
 
+    print("Download complete!")
+
 def close():
     sys.exit(app.exec())
 
