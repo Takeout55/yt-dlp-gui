@@ -4,6 +4,7 @@ from PySide6.QtUiTools import QUiLoader
 from PySide6.QtWidgets import QApplication, QTextEdit, QPushButton, QCheckBox, QComboBox
 from PySide6.QtCore import QFile, QIODevice
 import subprocess
+import os
 
 global ffmpeg_path
 global ytdlp_path
@@ -84,6 +85,12 @@ def save():
     ytdlp_path = info_window.findChild(QTextEdit, "ytdlp_entry").toPlainText()
     hasSaved = True
 
+    with open("lib/ffmpeg_path.txt", 'w') as file:
+        file.write(ffmpeg_path)
+
+    with open("lib/ytdlp_path.txt", 'w') as file:
+        file.write(ytdlp_path)
+
     info_close()
 
 def info():
@@ -105,6 +112,16 @@ def info():
         print(ytdlp_path,ffmpeg_path)
         info_window.findChild(QTextEdit,"ytdlp_entry").setPlainText(ytdlp_path)
         info_window.findChild(QTextEdit, "ffmpeg_entry").setPlainText(ffmpeg_path)
+    if hasSaved == False:
+        if os.path.exists("lib/ytdlp_path.txt"):
+            with open("lib/ytdlp_path.txt", 'r') as file:
+                ytdlp_path = file.read()
+                info_window.findChild(QTextEdit, "ytdlp_entry").setPlainText(ytdlp_path)
+        if os.path.exists("lib/ffmpeg_path.txt"):
+            with open("lib/ffmpeg_path.txt", 'r') as file:
+                ffmpeg_path = file.read()
+                info_window.findChild(QTextEdit, "ffmpeg_entry").setPlainText(ffmpeg_path)
+
 
     info_window.show()
 
