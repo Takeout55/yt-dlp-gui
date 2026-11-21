@@ -17,8 +17,19 @@ def run():
     global ytdlp_path
     global hasSaved
 
+    if os.path.exists("lib/ytdlp_path.txt"):
+        with open("lib/ytdlp_path.txt", 'r') as file:
+            ytdlp_path = file.read()
+    else:
+        ytdlp_path = "./yt-dlp.exe"
+    if os.path.exists("lib/ffmpeg_path.txt"):
+        with open("lib/ffmpeg_path.txt", 'r') as file:
+            ffmpeg_path = file.read()
+    else:
+        ffmpeg_path = "./ffmpeg/bin/ffmpeg.exe"
+
     if hasSaved == False:
-        ytdlp_path = "/home/takeout55/Music/yt-dlp"
+        ytdlp_path = "./yt-dlp"
         ffmpeg = ""
         ffmpeg_path = ""
     elif hasSaved == True:
@@ -32,6 +43,12 @@ def run():
             ytdlp_path = "/home/takeout55/Music/yt-dlp"
             print("default yt-dlp path!")
         else:
+            if ffmpeg_path == "":
+                ffmpeg = ""
+                print("ffmpeg path empty!")
+            else:
+                ffmpeg = f"--ffmpeg-location"
+                print("ffmpeg path found!")
             ytdlp_path = ytdlp_path
             print("custom yt-dlp path!")
 
