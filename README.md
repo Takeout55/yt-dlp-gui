@@ -26,3 +26,6 @@ For future versions, two releases will be available. One that includes the Linux
 - Format = Select your chosen format out of the available choices (more will be added soon)
 - Playlist = By default, the program adds the "--no-playlist" argument, enabling playlist will disable this
 - Custom title = allows you to customize the name of the downloaded file
+
+### Disclaimer
+No AI was used during the development of this software. I do not believe in using claude or chatgpt for writing code
